@@ -1,0 +1,28 @@
+{
+  "name": "phonestash",
+  "version": "0.1.0",
+  "description": "phoneStash is the First Multi Vendor Voip Phone configuration Parser Based on Node.JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voicenter/phoneStash.git"
+  },
+  "keywords": [
+    "phoneStash",
+    "configorion",
+    "provisining"
+  ],
+  "author": "Voicenter Dev Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/voicenter/phoneStash/issues"
+  },
+  "homepage": "https://github.com/voicenter/phoneStash#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mustache": "^3.0.1"
+  }
+}

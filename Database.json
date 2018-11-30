@@ -1,0 +1,43 @@
+{
+  "123456789012": {
+    "KeyList": [
+      {
+        "speeddial": "101",
+        "pattern_type": 1,
+        "device_key_id": 1,
+        "speeddial_name": ""
+      }
+    ],
+    "AuthType": 1,
+    "DeviceID": 1,
+    "AccountID": 7594,
+    "AccountList": [
+      {
+        "ID": 20,
+        "Data": {
+          "ha1": "",
+          "ha1b": "",
+          "rpid": "",
+          "ds_alg": 0,
+          "ds_set": 0,
+          "headers": {
+            "pstn_911": "8329008615",
+            "pstn_flag": "3"
+          },
+          "accountid": "7594",
+          "caller_name": "alex1alex1",
+          "max_contacts": 1,
+          "email_address": "alex1@officering.com",
+          "publish_group": 1,
+          "sms_caller_id": "12128765432",
+          "rtpproxy_enabled": 0
+        },
+        "User": "alex",
+        "Domain": "sip.voip.com",
+        "Password": "WeLoveSIP",
+        "AccountID": "666"
+      }
+    ]
+  }
+}
+
