@@ -1,5 +1,6 @@
 exports.phoneStash =class phoneStash{
     constructor(phoneConfig){
+        var _this =this
         
         this.AccountList =[]
         this.KeyList =[]
@@ -7,14 +8,14 @@ exports.phoneStash =class phoneStash{
         if(phoneConfig.AccountList && phoneConfig.AccountList.constructor.name==='Array'){
             phoneConfig.AccountList.forEach(function (accountConf) {
                 let accountObj = new exports.PhoneStashAccount(accountConf)
-                if(accountObj)AccountList.push(accountObj)
+                if(accountObj)_this.AccountList.push(accountObj)
             })
         }
         // noinspection JSAnnotator 
         if(phoneConfig.KeyList && phoneConfig.KeyList.constructor.name==='Array'){
             phoneConfig.KeyList.forEach(function (keyConf) {
                 let keyObj = new exports.PhoneStashKey(keyConf)
-                if(keyObj)KeyList.push(keyObj)
+                if(keyObj)_this.KeyList.push(keyObj)
             })
         }
 
@@ -59,7 +60,7 @@ exports.PhoneStashKey =class PhoneStashKey {
         if ( KeyConf.KeyNumber && KeyConf.KeyNumber.constructor.name==="String"){
             this.KeyNumber = KeyConf.KeyNumber
         }else {
-            log.error("KeyNumber is not define for this account ",KeyConf)
+            console.error("KeyNumber is not define for this account ",KeyConf)
             return null
         }
         // noinspection JSAnnotator
