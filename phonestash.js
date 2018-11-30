@@ -7,15 +7,25 @@ exports.phoneStash =class phoneStash{
         // noinspection JSAnnotator 
         if(phoneConfig.AccountList && phoneConfig.AccountList.constructor.name==='Array'){
             phoneConfig.AccountList.forEach(function (accountConf) {
-                let accountObj = new exports.PhoneStashAccount(accountConf)
-                if(accountObj)_this.AccountList.push(accountObj)
+              try{
+                  let accountObj = new exports.PhoneStashAccount(accountConf)
+                  if(accountObj)_this.AccountList.push(accountObj)
+              }catch (e){
+                  console.error(e)
+              }
+
             })
         }
         // noinspection JSAnnotator 
         if(phoneConfig.KeyList && phoneConfig.KeyList.constructor.name==='Array'){
             phoneConfig.KeyList.forEach(function (keyConf) {
-                let keyObj = new exports.PhoneStashKey(keyConf)
-                if(keyObj)_this.KeyList.push(keyObj)
+                try{
+                    let keyObj = new exports.PhoneStashKey(keyConf)
+                    if(keyObj)_this.KeyList.push(keyObj)
+                }catch (e){
+                    console.error(e)
+                }
+
             })
         }
 
@@ -34,14 +44,14 @@ exports.PhoneStashAccount =class PhoneStashAccount {
             this.User = AccountConf.User
         }else {
             log.error("User is not define for this account ",AccountConf)
-            return null
+            throw  Error('User is not define for this account');
         }
         // noinspection JSAnnotator
         if ( AccountConf.Password && AccountConf.Password.constructor.name==="String"){
             this.Password = AccountConf.Password
         }else {
             log.error("Password is not define for this account ",AccountConf)
-            return null
+            throw  Error('Password is not define for this account');
         }
         // noinspection JSAnnotator
         if ( AccountConf.Data && AccountConf.Data.constructor.name==="Object"){
@@ -61,7 +71,7 @@ exports.PhoneStashKey =class PhoneStashKey {
             this.KeyNumber = KeyConf.KeyNumber
         }else {
             console.error("KeyNumber is not define for this account ",KeyConf)
-            return null
+         throw  Error('KeyNumber is not define for this account ');
         }
         // noinspection JSAnnotator
         if ( KeyConf.KeyName && KeyConf.KeyName.constructor.name==="String"){
