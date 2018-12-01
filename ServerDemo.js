@@ -1,41 +1,6 @@
-# phoneStash
-phoneStash is the First Multi Vendor Voip Phone configuration Parser Based on Node.JS
-This project contain lib + simple webService based of mustache.js
-
-for test run ServerDemo.js and browse to:
-`http://127.0.0.1:3000/123456789012.cfg?Debug=True`
-
-/*
-****************************************************************************
-Minimal    Phone config object  sample
-* **************************************************************************
-`````
-{
-    "TemplateName": "vvx300"
-    "KeyList": [
-    {
-        "KeyNumber": "101",
-        "KeyName": ""
-        "Data" : {}
-    }
-],
-    "AccountList": [
-    {
-        "User": "alex",
-        "Domain": "sip.voip.com",
-        "Password": "WeLoveSIP",
-        "Data": {},
-
-    }
-]
-}
-````````````````
-Demo Server implementation 
-`````````````
-
 const express = require('express')
 const phoneStashLib  = require('phoneStash')
-phoneStashLib.PhoneStashLoadPhoneTemplate("templates");
+phoneStashLib.PhoneStashLoadPhoneTemplate();
 const app = express()
 const port = 3000
 const fs = require('fs');
@@ -66,7 +31,3 @@ function LoadPhoneConfbyMacFromDB(mac) {
     return dummyDB[mac]
 
 }
-
-
-
-````````````` 
