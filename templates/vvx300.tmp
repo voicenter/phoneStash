@@ -1,0 +1,13 @@
+!!!!!!!!!!{{TemplateName}}!!!!!!!!!
+AccountList
+{{#AccountList}}
+<br />
+<b>{{User}}</b> : {{Domain}}-{{Password}}
+{{/AccountList}}
+
+
+
+{{#KeyList}}
+<br />
+<b>{{KeyName}}</b>{{KeyNumber}}
+{{/KeyList}}

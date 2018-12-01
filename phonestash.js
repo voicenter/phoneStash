@@ -1,10 +1,19 @@
+const dir = require('node-dir');
+const Mustache = require('mustache')
+
 exports.phoneStash =class phoneStash{
     constructor(phoneConfig){
         var _this =this
         
         this.AccountList =[]
         this.KeyList =[]
-        // noinspection JSAnnotator 
+        this.TemplateName = ""
+        if(phoneConfig.TemplateName && phoneConfig.TemplateName.constructor.name==='String'){
+            _this.TemplateName=phoneConfig.TemplateName;
+        }
+
+
+            // noinspection JSAnnotator
         if(phoneConfig.AccountList && phoneConfig.AccountList.constructor.name==='Array'){
             phoneConfig.AccountList.forEach(function (accountConf) {
               try{
@@ -28,6 +37,10 @@ exports.phoneStash =class phoneStash{
 
             })
         }
+
+    }
+    ReanderConfig(){
+      return  Mustache.render(global.Templates[this.TemplateName], this);
 
     }
 
@@ -70,8 +83,8 @@ exports.PhoneStashKey =class PhoneStashKey {
         if ( KeyConf.KeyNumber && KeyConf.KeyNumber.constructor.name==="String"){
             this.KeyNumber = KeyConf.KeyNumber
         }else {
-            console.error("KeyNumber is not define for this account ",KeyConf)
-         throw  Error('KeyNumber is not define for this account ');
+            console.error("KeyNumber is not define for this Key ",KeyConf)
+         throw  Error('KeyNumber is not define for this Key ');
         }
         // noinspection JSAnnotator
         if ( KeyConf.KeyName && KeyConf.KeyName.constructor.name==="String"){
@@ -85,33 +98,34 @@ exports.PhoneStashKey =class PhoneStashKey {
 
     }
 }
-/*
-****************************************************************************
-*                  Minimal    Phone config object  sample
-* **************************************************************************
-{
-    "KeyList": [
-    {
-        "KeyNumber": "101",
-        "KeyName": ""
-        "Data" : {}
-    }
-],
-    "AccountList": [
-    {
-        "User": "alex",
-        "Domain": "sip.voip.com",
-        "Password": "WeLoveSIP",
-        "Data": {},
-
-    }
-]
-}*/
-
 
 exports.PhoneStashMacParser = function (str) {
     str = str.replace(':','').replace('-','');
     var regex = /\b([0-9A-Fa-f]{2}){6}/; //http://www.regular-expressions.info/examples.html
     let mac = str.match(regex)[0]; // id = 'Ahg6qcgoay4'
     return mac
+}
+
+
+
+exports.PhoneStashLoadPhoneTemplate = function (dirName) {
+    let templates={}
+    if(!dirName)dirName="templates"
+
+    dir.readFiles(__dirname+'/'+dirName ,
+        function(err, content, filename, next) {
+            let fileNamestrArray = filename.replace('/','\\').split('\\')
+            let fileName = fileNamestrArray[fileNamestrArray.length-1].split('.')[0]
+            if (err) throw err;
+            templates[fileName]=content
+            console.log('content:', content);
+            next();
+        },
+        function(err, files){
+            if (err) throw err;
+            console.log('finished reading files:', files);
+            global.Templates = templates
+        });
+
+
 }

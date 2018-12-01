@@ -1,11 +1,12 @@
 {
   "123456789012": {
+    "TemplateName": "vvx300",
     "KeyList": [
       {
-        "speeddial": "101",
+        "KeyNumber": "101",
         "pattern_type": 1,
         "device_key_id": 1,
-        "speeddial_name": ""
+        "KeyName": ""
       }
     ],
     "AuthType": 1,

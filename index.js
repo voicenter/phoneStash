@@ -1,6 +1,7 @@
 console.log(this)
 const express = require('express')
 const phoneStashLib  = require('./phonestash')
+phoneStashLib.PhoneStashLoadPhoneTemplate();
 const app = express()
 const port = 3000
 const fs = require('fs');
@@ -15,7 +16,11 @@ app.get('*', (req, res) =>{
     if(phoneConf){
         phoneStash = new  phoneStashLib.phoneStash(phoneConf)
     }
-    res.send('Hello World ->'+mac+'<br/>'+JSON.stringify(phoneStash))
+    let configBody = phoneStash.ReanderConfig()
+    if(req.url.indexOf('Debug=True')>-1){
+        configBody = '<b>Debug Mode</b><br/>'+req.url +'<br/>mac:'+ mac +'<br/>TemplateName:'+phoneStash.TemplateName +'<br/>configBody:<br/>'+configBody
+    }
+    res.send(configBody)
 
 })
 
