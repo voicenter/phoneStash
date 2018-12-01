@@ -1,6 +1,5 @@
-console.log(this)
 const express = require('express')
-const phoneStashLib  = require('./phonestash')
+const phoneStashLib  = require('./phoneStash')
 phoneStashLib.PhoneStashLoadPhoneTemplate();
 const app = express()
 const port = 3000
@@ -24,7 +23,7 @@ app.get('*', (req, res) =>{
 
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`PhoneStash  WebServer Demo listening on port ${port}!`))
 
 
 function LoadPhoneConfbyMacFromDB(mac) {
