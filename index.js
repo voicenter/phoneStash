@@ -4,32 +4,43 @@ const Mustache = require('mustache')
 exports.phoneStash =class phoneStash{
     constructor(phoneConfig){
         var _this =this
-        
+
         this.AccountList =[]
         this.KeyList =[]
         this.TemplateName = ""
+        this.Data = ""
         if(phoneConfig.TemplateName && phoneConfig.TemplateName.constructor.name==='String'){
             _this.TemplateName=phoneConfig.TemplateName;
         }
 
+        if(phoneConfig.Data && phoneConfig.Data.constructor.name==='Object'){
+            _this.Data=phoneConfig.Data;
+        }
 
-            // noinspection JSAnnotator
+
+        // noinspection JSAnnotator
         if(phoneConfig.AccountList && phoneConfig.AccountList.constructor.name==='Array'){
+            let counter =0
             phoneConfig.AccountList.forEach(function (accountConf) {
-              try{
-                  let accountObj = new exports.PhoneStashAccount(accountConf)
-                  if(accountObj)_this.AccountList.push(accountObj)
-              }catch (e){
-                  console.error(e)
-              }
+                try{
+                    let accountObj = new exports.PhoneStashAccount(accountConf)
+                    counter++
+                    accountObj.Index=counter
+                    if(accountObj)_this.AccountList.push(accountObj)
+                }catch (e){
+                    console.error(e)
+                }
 
             })
         }
-        // noinspection JSAnnotator 
+        // noinspection JSAnnotator
         if(phoneConfig.KeyList && phoneConfig.KeyList.constructor.name==='Array'){
+            let counter =0
             phoneConfig.KeyList.forEach(function (keyConf) {
                 try{
                     let keyObj = new exports.PhoneStashKey(keyConf)
+                    counter++
+                    keyObj.Index=counter
                     if(keyObj)_this.KeyList.push(keyObj)
                 }catch (e){
                     console.error(e)
@@ -40,7 +51,7 @@ exports.phoneStash =class phoneStash{
 
     }
     ReanderConfig(){
-      return  Mustache.render(global.Templates[this.TemplateName], this);
+        return  Mustache.render(global.Templates[this.TemplateName], this);
 
     }
 
@@ -52,6 +63,7 @@ exports.PhoneStashAccount =class PhoneStashAccount {
         this.User=""
         this.Password=""
         this.Data={}
+        this.Index = 0
         // noinspection JSAnnotator
         if ( AccountConf.User && AccountConf.User.constructor.name==="String"){
             this.User = AccountConf.User
@@ -79,12 +91,13 @@ exports.PhoneStashKey =class PhoneStashKey {
         this.KeyNumber=""
         this.KeyName=""
         this.Data={}
+        this.Index = 0
         // noinspection JSAnnotator
         if ( KeyConf.KeyNumber && KeyConf.KeyNumber.constructor.name==="String"){
             this.KeyNumber = KeyConf.KeyNumber
         }else {
             console.error("KeyNumber is not define for this Key ",KeyConf)
-         throw  Error('KeyNumber is not define for this Key ');
+            throw  Error('KeyNumber is not define for this Key ');
         }
         // noinspection JSAnnotator
         if ( KeyConf.KeyName && KeyConf.KeyName.constructor.name==="String"){
@@ -111,11 +124,11 @@ exports.PhoneStashMacParser = function (str) {
 exports.PhoneStashLoadPhoneTemplate = function (dirName) {
     let templates={}
     if(!dirName)dirName="templates"
-        if(__dirname.indexOf('node_modules')>-1){
-            dirName=   __dirname+'/../../'+dirName
-        }else{
-            dirName=   __dirname+'/'+dirName
-        }
+    if(__dirname.indexOf('node_modules')>-1){
+        dirName=   __dirname+'/../../'+dirName
+    }else{
+        dirName=   __dirname+'/'+dirName
+    }
 
     dir.readFiles(dirName ,
         function(err, content, filename, next) {

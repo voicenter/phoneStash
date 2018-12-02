@@ -17,7 +17,7 @@ app.get('*', (req, res) =>{
     }
     let configBody = phoneStash.ReanderConfig()
     if(req.url.indexOf('Debug=True')>-1){
-        configBody = '<b>Debug Mode</b><br/>'+req.url +'<br/>mac:'+ mac +'<br/>TemplateName:'+phoneStash.TemplateName +'<br/>configBody:<br/>'+configBody
+        configBody = '<b>Debug Mode</b><br/>'+req.url +'<br/>mac:'+ mac +'<br/>TemplateName:'+phoneStash.TemplateName+ '<br/>'+JSON.stringify(phoneStash)+'<br/>configBody:<br/>'+configBody
     }
     res.send(configBody)
 

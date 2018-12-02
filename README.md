@@ -2,9 +2,11 @@
 phoneStash is the First Multi Vendor Voip Phone configuration Parser Based on Node.JS
 This project contain lib + simple webService based of mustache.js
 
-for test run ServerDemo.js and browse to:
+for test copy templates dir and Database.json to the main folder and   run ServerDemo.js 
+ than browse to:
 `http://127.0.0.1:3000/123456789012.cfg?Debug=True`
-
+or 
+`http://127.0.0.1:3000/123456789012.cfg`
 /*
 ****************************************************************************
 Minimal    Phone config object  sample

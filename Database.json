@@ -1,6 +1,10 @@
 {
   "123456789012": {
     "TemplateName": "vvx300",
+    "Data":
+      {
+        "foo":"bar"
+      },
     "KeyList": [
       {
         "KeyNumber": "101",
