@@ -1,5 +1,5 @@
 const express = require('express')
-const phoneStashLib  = require('phoneStash')
+const phoneStashLib  = require('./index.js')
 phoneStashLib.PhoneStashLoadPhoneTemplate();
 const app = express()
 const port = 3000
