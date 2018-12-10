@@ -4,16 +4,24 @@ phoneStashLib.PhoneStashLoadPhoneTemplate();
 const app = express()
 const port = 3000
 const fs = require('fs');
-const dummyDB = JSON.parse(fs.readFileSync('Database.json', 'utf8'));
-
+const dummyDB = JSON.parse(fs.readFileSync(__dirname+ '/Database.json', 'utf8'));
+app.use(express.static('Phone_configs'))
 app.get('*', (req, res) =>{
-
+    console.log(req.url)
     let mac = phoneStashLib.PhoneStashMacParser(req.url)
     console.log(mac)
+
     let phoneConf =LoadPhoneConfbyMacFromDB(mac)
     let phoneStash
+    let TemplateName = ''
+    let MyCode = ''
     if(phoneConf){
         phoneStash = new  phoneStashLib.phoneStash(phoneConf)
+        phoneStash.Headers = req.headers
+        let MyTarget = phoneStashLib.PhoneStashDirectoryParser(req.url)
+        if(MyTarget && MyTarget!='') {
+            console.log(phoneConf.PhoneTemplateName + "  " + phoneConf.MainTemplateName + " directory: " + MyTarget)
+            TemplateName = MyTarget
     }
     let configBody = phoneStash.ReanderConfig()
     if(req.url.indexOf('Debug=True')>-1){
@@ -21,6 +29,7 @@ app.get('*', (req, res) =>{
     }
     res.send(configBody)
 
+    }
 })
 
 app.listen(port, () => console.log(`PhoneStash  WebServer Demo listening on port ${port}!`))

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APPLICATION
+APP_FILE_PATH="HTTP://{{Headers.host}}/{{Data.DeviceVendorName}}/{{Data.DeviceVersion}}/sip.ld"
+CONFIG_FILES="HTTP://{{Headers.host}}/PhoneCfg/{{MAC}}.cfg"
+MISC_FILES=""
+LOG_FILE_DIRECTORY=""
+OVERRIDES_DIRECTORY=""
+CONTACTS_DIRECTORY="HTTP://{{Headers.host}}/Directory/{{MAC}}.cfg"
+LICENSE_DIRECTORY="">
+</APPLICATION>

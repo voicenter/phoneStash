@@ -1,10 +1,18 @@
 {
   "123456789012": {
-    "TemplateName": "vvx300",
-    "Data":
+    "MainTemplateName": "Main",
+    "PhoneTemplateName": "vvx300",
+    "MAC": "123456789012",
+    "Directory": [
       {
-        "foo":"bar"
-      },
+        "LastName":"Danny",
+        "FirstName":"Cell",
+        "Contact":"8139920778",
+        "RingType":"3",
+        "BLF":"0",
+        "BlockBLF":"0"
+      }
+    ],
     "KeyList": [
       {
         "KeyNumber": "101",
@@ -20,6 +28,16 @@
       {
         "ID": 20,
         "Data": {
+          "DND": 0,
+          "transport": "UDPOnly",
+          "port": 5060,
+          "DisplayName": "Alex Goulis",
+          "DisplayLabel": "105",
+          "RegExpire": "60",
+          "RingType": "2",
+          "LineKeys": "1",
+          "MWICallback": "*5104",
+          "CallsPerLineKey": "6",
           "ha1": "",
           "ha1b": "",
           "rpid": "",
@@ -30,7 +48,7 @@
             "pstn_flag": "3"
           },
           "accountid": "7594",
-          "caller_name": "alex1alex1",
+          "caller_name": "alex1",
           "max_contacts": 1,
           "email_address": "alex1@officering.com",
           "publish_group": 1,

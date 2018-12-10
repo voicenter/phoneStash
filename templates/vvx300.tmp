@@ -1,14 +1,509 @@
-!!!!!!!!!!{{TemplateName}}!!!!!!!!
-!!!!!!!!!!!{{Data.foo}}!!!!!!!!!
-AccountList
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Application SIP PrairieDog 4.1.8.0938 10-May-16 15:55 {{MyRandomString}}-->
+<!-- Created ".$dater." -->
+<!-- !!!!!!!!!!{{TemplateName}}!!!!!!!!! -->
+<polycomconfig>
+<reg
 {{#AccountList}}
-<br />
-<b>{{User}}</b> : {{Domain}}-{{Password}}
+reg.{{Index}}.server.1.transport="{{Data.transport}}"
+reg.{{Index}}.server.1.port="{{Data.port}}"
+reg.{{Index}}.displayName="{{Data.DisplayName}}"
+reg.{{Index}}.label="{{Data.DisplayLabel}}"
+reg.{{Index}}.address="{{User}}"
+reg.{{Index}}.type="private"
+reg.{{Index}}.auth.userId="{{User}}"
+reg.{{Index}}.auth.password="{{Password}}"
+reg.{{Index}}.server.1.address="{{Domain}}"
+reg.{{Index}}.server.1.expires="{{Data.RegExpire}}"
+reg.{{Index}}.server.1.register="1"
+reg.{{Index}}.outboundProxy.address=""
+reg.{{Index}}.ringType="{{Data.RingType}}"
+reg.{{Index}}.lineKeys="{{Data.LineKeys}}""
+reg.{{Index}}.callsPerLineKey="{{Data.CallsPerLineKey}}"
+reg.{{Index}}.serverFeatureControl.cf=""
+{{#Data.DND}}
+reg.{{Index}}.serverFeatureControl.dnd="1"
+reg.{{Index}}.serverFeatureControl.activateCodeSequence.dnd="*78"
+reg.{{Index}}.serverFeatureControl.deActivateCodeSequence.dnd="*79"
+{{/Data.DND}}
 {{/AccountList}}
+/reg>
+{{#Data.LocalPaging}}
+<ptt
+    ptt.address="224.0.1.116"
+    ptt.port="10000"
+    ptt.pageMode.enable="1"
+    ptt.pageMode.displayName=""
+    ptt.pageMode.defaultGroup="1"
+    ptt.pageMode.emergencyGroup="25"
+    ptt.pageMode.priorityGroup="24"
+    ptt.pageMode.codec="G.722"
+    ptt.pageMode.transmit.timeout.continuation="60"
+    ptt.pageMode.transmit.timeout.initial="0"
+    ptt.pageMode.allowOffHookPages="0"
+	{{#Data.PagingGroups}}
+
+        ptt.pageMode.group.{{Index}}.available="1"
+        ptt.pageMode.group.{{Index}}.allowTransmit="1"
+        ptt.pageMode.group.{{Index}}.allowReceive="0"
+        ptt.pageMode.group.{{Index}}.label="{{PagingGroupName}}"
+        ptt.pageMode.group.{{Index}}.subscribed="1"";
+
+	{{/Data.PagingGroups}}
+    {{^Data.PagingGroups}}
+    {{/Data.PagingGroups}}
+    ptt.pageMode.group.24.subscribed="0"
+    ptt.pageMode.group.25.subscribed="0"
+    ptt.channel.1.subscribed="0"
+    ptt.channel.24.subscribed="0"
+    ptt.channel.25.subscribed="0"
+/>
+<efk>
+    <version efk.version="2" />
+    <efklist
+        efk.efklist.2.mname="Paging"
+        efk.efklist.2.label="Paging"
+        efk.efklist.2.status="1"
+        efk.efklist.2.action.string="\$FPage$"
+      />
+
+    </efk>
+<change efk.softkey.alignleft="1" />
+  <softkey
+  softkey.feature.doNotDisturb="{{Data.DNDKey}}"
+  softkey.feature.intercom="0"
+  softkey.feature.newcall="1"
+  softkey.feature.forward="{{Data.ForwardKey}}"
+  softkey.feature.directories="0"
+
+    softkey.1.enable="0"
+      softkey.1.use.active="0"
+      softkey.1.use.alerting="0"
+      softkey.1.use.dialtone="0"
+      softkey.1.use.hold="0"
+      softkey.1.use.idle="0"
+      softkey.1.use.proceeding="0"
+      softkey.1.use.setup="0"
+    softkey.1.label="Intercom"
+    softkey.1.action="$FIntercom$"
+    softkey.2.enable="1"
+    softkey.2.use.idle="0"
+    softkey.2.use.alerting="1"
+    softkey.2.use.hold="1"
 
 
+     softkey.2.use.alerting="1"
 
+     softkey.2.use.dialtone="1"
+    softkey.2.label="Paging"
+    softkey.2.action="!Paging"
+/>
+{{/Data.LocalPaging}}
+<Volume voice.volume.persist.handset="1" voice.volume.persist.handsfree="1" voice.volume.persist.headset="1" />
+<powerSaving powerSaving.enable="0" />
+<up up.25mm="1" up.25mmRealTime="1" up.accessibilityFeatures="0" up.analogHeadsetOption="0" up.audioMode="0" up.callTypeOrderVoice="0" up.cfgWarningsEnabled="0" up.displayOperMode="0" up.handsfreeMode="1" up.headsetMode="0" up.hideDateTimeWhenNotSet="0" up.idleStateView="0" up.localClockEnabled="1" up.manualProtocolRouting="1" up.mwiVisible="0" up.onHookDialingEnabled="1" up.pstnSetup="0" up.simplifiedSipCallInfo="0" up.useDirectoryNames="1" up.warningLevel="0" up.welcomeSoundEnabled="1" up.welcomeSoundOnWarmBootEnabled="0" up.oneTouchVoiceMail="1">
+    <up.2P5mmJack up.2P5mmJack.mode="0">
+    </up.2P5mmJack>
+    <up.audioSetup up.audioSetup.auxInput="2" up.audioSetup.auxOutput="2">
+    </up.audioSetup>
+    <up.backlight up.backlight.idleIntensity="1" up.backlight.onIntensity="3" up.backlight.timeout="40">
+    </up.backlight>
+    <up.headset up.headset.phoneVolumeControl="auto">
+    </up.headset>
+    <up.hearingAidCompatibility up.hearingAidCompatibility.enabled="0">
+    </up.hearingAidCompatibility>
+    <up.idleBrowser up.idleBrowser.enabled="0">
+    </up.idleBrowser>
+    <up.manualProtocolRouting up.manualProtocolRouting.softKeys="1">
+    </up.manualProtocolRouting>
+    <up.offHookAction up.offHookAction.none="0">
+    </up.offHookAction>
+    <up.pictureFrame up.pictureFrame.folder="" up.pictureFrame.timePerImage="5">
+    </up.pictureFrame>
+    <up.screenSaver up.screenSaver.enabled="0" up.screenSaver.type="0" up.screenSaver.waitTime="15">
+    </up.screenSaver>
+    <up.toneControl up.toneControl.bass="0" up.toneControl.treble="0">
+    </up.toneControl>
+  </up>
+  <callLists
+   callLists.collapseDuplicates="1"
+   callLists.filterAll="0"
+   callLists.filterEnabled="0"
+   callLists.grouping="Unified"
+   callLists.logConsultationCalls="0"
+   callLists.size="99"
+   callLists.writeDelay
+   callLists.writeDelay.journal="5"
+   callLists.writeDelay.terminated="60"
+   />
+
+    <feature feature.autolocalhold="0">
+    <feature.acdagentavailability feature.acdagentavailability.enabled="0">
+    </feature.acdagentavailability>
+    <feature.acdloginlogout feature.acdloginlogout.enabled="0">
+    </feature.acdloginlogout>
+    <feature.acdpremiumunavailability feature.acdpremiumunavailability.enabled="0">
+    </feature.acdpremiumunavailability>
+    <feature.acdservicecontroluri feature.acdservicecontroluri.enabled="0">
+    </feature.acdservicecontroluri>
+    <feature.bluetooth feature.bluetooth.enabled="1">
+    </feature.bluetooth>
+    <feature.callcenterstatus feature.callcenterstatus.enabled="0">
+    </feature.callcenterstatus>
+    <feature.calllist feature.calllist.enabled="1">
+    </feature.calllist>
+    <feature.calllistmissed feature.calllistmissed.enabled="1">
+    </feature.calllistmissed>
+    <feature.calllistplaced feature.calllistplaced.enabled="1">
+    </feature.calllistplaced>
+    <feature.calllistreceived feature.calllistreceived.enabled="1">
+    </feature.calllistreceived>
+    <feature.callpark feature.callpark.enabled="0">
+    </feature.callpark>
+    <feature.callrecording feature.callrecording.enabled="1">
+    </feature.callrecording>
+    <feature.corporatedirectory feature.corporatedirectory.enabled="0">
+    </feature.corporatedirectory>
+    <feature.directedcallpickup feature.directedcallpickup.enabled="{{Data.EnableCallPickup}}">
+    </feature.directedcallpickup>
+    <feature.directory feature.directory.enabled="1">
+    </feature.directory>
+    <feature.enhancedcalldisplay feature.enhancedcalldisplay.enabled="0">
+    </feature.enhancedcalldisplay>
+    <feature.enhancedfeaturekeys feature.enhancedfeaturekeys.enabled="{{Data.EnableEFK}}">
+    </feature.enhancedfeaturekeys>
+    <feature.exchangecalendar feature.exchangecalendar.enabled="0">
+    </feature.exchangecalendar>
+    <feature.groupcallpickup feature.groupcallpickup.enabled="0">
+    </feature.groupcallpickup>
+    <feature.hoteling feature.hoteling.enabled="0">
+    </feature.hoteling>
+    <feature.lastcallreturn feature.lastcallreturn.enabled="0">
+    </feature.lastcallreturn>
+    <feature.messaging feature.messaging.enabled="{{Data.EnableIM}}">
+    </feature.messaging>
+    <feature.moh feature.moh.enabled="0" feature.moh.filename="">
+    </feature.moh>
+    <feature.nwayconference feature.nwayconference.enabled="0">
+    </feature.nwayconference>
+    <feature.pictureframe feature.pictureframe.enabled="1">
+    </feature.pictureframe>
+    <feature.presence feature.presence.enabled="{{Data.EnablePresence}}">
+    </feature.presence>
+    <feature.ringdownload feature.ringdownload.enabled="1">
+    </feature.ringdownload>
+    <feature.urldialing feature.urldialing.enabled="0">
+    </feature.urldialing>
+  </feature>
+<call>
+
+    <directedCallPickupMethod call.directedCallPickupMethod="native"/>
+    <directedCallPickupString call.directedCallPickupString=""/>
+
+    <autoOffHook call.autoOffHook.1.enabled="0"
+call.autoOffHook.1.contact=""
+call.autoOffHook.2.enabled="0"
+    call.autoOffHook.2.contact=""
+call.autoOffHook.3.enabled="0"
+call.autoOffHook.3.contact=""
+    call.autoOffHook.4.enabled="0"
+call.autoOffHook.4.contact=""
+call.autoOffHook.5.enabled="0"
+    call.autoOffHook.5.contact=""
+call.autoOffHook.6.enabled="0"
+call.autoOffHook.6.contact=""/>
+    <missedCallTracking call.missedCallTracking.1.enabled="1"
+call.missedCallTracking.2.enabled="1"
+    call.missedCallTracking.3.enabled="1"
+call.missedCallTracking.4.enabled="1"
+    call.missedCallTracking.5.enabled="1"
+call.missedCallTracking.6.enabled="1"/>
+    <serverMissedCall call.serverMissedCall.1.enabled="0"
+call.serverMissedCall.2.enabled="0"
+    call.serverMissedCall.3.enabled="0"
+call.serverMissedCall.4.enabled="0"
+call.serverMissedCall.5.enabled="0"
+    call.serverMissedCall.6.enabled="0"/>
+
+    <callWaiting call.callWaiting.ring="beep"/>
+</call>
+<divert
+divert.1.contact=""
+
+divert.1.autoOnSpecificCaller="1"
+
+divert.1.sharedDisabled="1"
+
+divert.2.contact=""
+
+divert.2.autoOnSpecificCaller="1"
+divert.2.sharedDisabled="1"
+divert.3.contact=""
+divert.3.autoOnSpecificCaller="1"
+divert.3.sharedDisabled="1"
+divert.4.contact=""
+divert.4.autoOnSpecificCaller="1"
+divert.4.sharedDisabled="1"
+divert.5.contact=""
+divert.5.autoOnSpecificCaller="1"
+divert.5.sharedDisabled="1"
+divert.6.contact=""
+divert.6.autoOnSpecificCaller="1"
+divert.6.sharedDisabled="1">
+<fwd
+divert.fwd.1.enabled="1"
+divert.fwd.2.enabled="1"
+divert.fwd.3.enabled="1"
+divert.fwd.4.enabled="1"
+divert.fwd.5.enabled="1"
+divert.fwd.6.enabled="1"/>
+<busy
+divert.busy.1.enabled="1"
+divert.busy.1.contact=""
+divert.busy.2.enabled="1"
+divert.busy.2.contact=""
+divert.busy.3.enabled="1"
+divert.busy.3.contact=""
+divert.busy.4.enabled="1"
+divert.busy.4.contact=""
+divert.busy.5.enabled="1"
+divert.busy.5.contact=""
+divert.busy.6.enabled="1"
+divert.busy.6.contact=""/>
+<noanswer
+divert.noanswer.1.enabled="1"
+divert.noanswer.1.timeout="60"
+divert.noanswer.1.contact=""
+divert.noanswer.2.enabled="1"
+divert.noanswer.2.timeout="60"
+divert.noanswer.2.contact=""
+divert.noanswer.3.enabled="1"
+divert.noanswer.3.timeout="60"
+divert.noanswer.3.contact=""
+divert.noanswer.4.enabled="1"
+divert.noanswer.4.timeout="60"
+divert.noanswer.4.contact=""
+divert.noanswer.5.enabled="1"
+divert.noanswer.5.timeout="60"
+divert.noanswer.5.contact=""
+divert.noanswer.6.enabled="1"
+divert.noanswer.6.timeout="60"
+divert.noanswer.6.contact=""/>
+
+        </divert>
+<dialplan
+dialplan.1.impossibleMatchHandling="0"
+dialplan.1.removeEndOfDial="1"
+dialplan.1.applyToUserSend="1"
+dialplan.1.applyToUserDial="1"
+dialplan.1.applyToCallListDial="0"
+dialplan.1.applyToDirectoryDial="0"
+dialplan.2.impossibleMatchHandling="0"
+dialplan.2.removeEndOfDial="1"
+dialplan.2.applyToUserSend="1"
+dialplan.2.applyToUserDial="1"
+dialplan.2.applyToCallListDial="0"
+dialplan.2.applyToDirectoryDial="0"
+dialplan.3.impossibleMatchHandling="0"
+dialplan.3.removeEndOfDial="1"
+dialplan.3.applyToUserSend="1"
+dialplan.3.applyToUserDial="1"
+dialplan.3.applyToCallListDial="0"
+dialplan.3.applyToDirectoryDial="0"
+dialplan.4.impossibleMatchHandling="0"
+dialplan.4.removeEndOfDial="1"
+dialplan.4.applyToUserSend="1"
+dialplan.4.applyToUserDial="1"
+dialplan.4.applyToCallListDial="0"
+dialplan.4.applyToDirectoryDial="0"
+dialplan.5.impossibleMatchHandling="0"
+dialplan.5.removeEndOfDial="1"
+dialplan.5.applyToUserSend="1"
+dialplan.5.applyToUserDial="1"
+dialplan.5.applyToCallListDial="0"
+dialplan.5.applyToDirectoryDial="0"
+dialplan.6.impossibleMatchHandling="0"
+dialplan.6.removeEndOfDial="1"
+dialplan.6.applyToUserSend="1"
+dialplan.6.applyToUserDial="1"
+dialplan.6.applyToCallListDial="0"
+dialplan.6.applyToDirectoryDial="0">
+<digitmap
+dialplan.1.digitmap=""
+dialplan.1.digitmap.timeOut=""
+dialplan.2.digitmap=""
+dialplan.2.digitmap.timeOut=""
+dialplan.3.digitmap=""
+dialplan.3.digitmap.timeOut=""
+dialplan.4.digitmap=""
+dialplan.4.digitmap.timeOut=""
+dialplan.5.digitmap=""
+dialplan.5.digitmap.timeOut=""
+dialplan.6.digitmap=""
+dialplan.6.digitmap.timeOut=""/>
+<routing>
+<server dialplan.1.routing.server.1.address=""
+dialplan.1.routing.server.1.port=""
+dialplan.2.routing.server.1.address=""
+dialplan.2.routing.server.1.port=""
+dialplan.3.routing.server.1.address=""
+dialplan.3.routing.server.1.port=""
+dialplan.4.routing.server.1.address=""
+dialplan.4.routing.server.1.port=""
+dialplan.5.routing.server.1.address=""
+dialplan.5.routing.server.1.port=""
+dialplan.6.routing.server.1.address=""
+dialplan.6.routing.server.1.port=""/>
+<emergency dialplan.1.routing.emergency.1.value=""
+dialplan.1.routing.emergency.1.server.1=""
+dialplan.2.routing.emergency.1.value=""
+dialplan.2.routing.emergency.1.server.1=""
+dialplan.3.routing.emergency.1.value=""
+dialplan.3.routing.emergency.1.server.1=""
+dialplan.4.routing.emergency.1.value=""
+dialplan.4.routing.emergency.1.server.1=""
+dialplan.5.routing.emergency.1.value=""
+dialplan.5.routing.emergency.1.server.1=""
+dialplan.6.routing.emergency.1.value=""
+dialplan.6.routing.emergency.1.server.1=""/>
+<digitmap dialplan.digitmap="{{Data.DigitMap}}"
+dialplan.digitmap.timeOut="2"/>
+</routing>
+        </dialplan>
+
+<msg
+msg.bypassInstantMessage="1">
+{{#AccountList}}
+<mwi
+msg.mwi.{{Index}}.subscribe=""
+msg.mwi.{{Index}}.callBackMode="contact"
+msg.mwi.{{Index}}.callBack=\{{Data.MWICallback}}"
+/>
+
+{{/AccountList}}
+</msg>
+<call>
+<call.autoAnswer call.autoAnswer.videoMute="0">
+</call.autoAnswer>
+<call.autoRouting call.autoRouting.preferredProtocol="SIP">
+</call.autoRouting>
+</call>
+<SNTP tcpIpApp.sntp.resyncPeriod="86400"
+tcpIpApp.sntp.address="pool.ntp.org"
+tcpIpApp.sntp.address.overrideDHCP="1"
+tcpIpApp.sntp.gmtOffset="{{Data.GMT}}"
+tcpIpApp.sntp.gmtOffset.overrideDHCP="0"
+tcpIpApp.sntp.daylightSavings.enable="1"
+tcpIpApp.sntp.daylightSavings.fixedDayEnable="0"
+tcpIpApp.sntp.daylightSavings.start.month="3"
+tcpIpApp.sntp.daylightSavings.start.date="8"
+tcpIpApp.sntp.daylightSavings.start.time="2"
+tcpIpApp.sntp.daylightSavings.start.dayOfWeek="1"
+tcpIpApp.sntp.daylightSavings.start.dayOfWeek.lastInMonth="0"
+tcpIpApp.sntp.daylightSavings.stop.month="11"
+tcpIpApp.sntp.daylightSavings.stop.date="1"
+tcpIpApp.sntp.daylightSavings.stop.time="2"
+tcpIpApp.sntp.daylightSavings.stop.dayOfWeek="1"
+tcpIpApp.sntp.daylightSavings.stop.dayOfWeek.lastInMonth="0"/>
+
+<device device.set="1"
+device.auth.localAdminPassword.set="1"
+device.auth.localAdminPassword="{{Data.AdminPassword}}"
+/>
+
+{{#Data.BLFEnable}}
+<attendant attendant.reg="1" attendant.ringType="ringer1" attendant.uri="">
+<attendant.behaviors>
+<attendant.behaviors.display>
+ <attendant.behaviors.display.remoteCallerID
+  attendant.behaviors.display.remoteCallerID.automata="1" />
+ <attendant.behaviors.display.spontaneousCallAppearances
+ attendant.behaviors.display.spontaneousCallAppearances.normal="{{Data.DisplayCallAppearances}}"
+ attendant.behaviors.display.spontaneousCallAppearances.automata="0" />
+ </attendant.behaviors.display>
+ </attendant.behaviors>
+<attendant.resourceList.0.address=""
+ attendant.resourceList.0.label=""
+ attendant.resourceList.0.type=""
+ attendant.resourceList.0.proceedingIsRecipent="0"
 {{#KeyList}}
-<br />
-<b>{{KeyName}}</b>{{KeyNumber}}
+{{#Data.BLF}}
+attendant.resourceList.{{Data.BLFKey}}.address="{{Data.Target}}"
+attendant.resourceList.{{Data.BLFKey}}.label="{{KeyName}}"
+attendant.resourceList.{{Data.BLFKey}}.type="normal"
+{{#Data.EnableCallPickup}}
+attendant.resourceList.{{Data.BLFKey}}.proceedingIsRecipent="0"
+{{/Data.EnableCallPickup}}
+{{/Data.BLF}}
 {{/KeyList}}
+/>
+</attendant>
+<lineKey>
+<lineKey.reassignment lineKey.reassignment.enabled="1"/>
+</lineKey>
+{{#KeyList}}
+    {{#Data.Line}}
+         <linekey lineKey.{{KeyNumber}}.category="line" lineKey.{{KeyNumber}}.index="1"/>
+    {{/Data.Line}}
+    {{#Data.Unassigned}}
+         <linekey lineKey.{{KeyNumber}}.category="unassigned" lineKey.{{KeyNumber}}.index="{{KeyNumber}}"/>
+    {{/Data.Unassigned}}
+    {{#Data.BLF}}
+         <linekey lineKey.{{KeyNumber}}.category="BLF" lineKey.{{KeyNumber}}.index="0"/>
+    {{/Data.BLF}}
+    {{#Data.SpeedDial}}
+         <linekey lineKey.{{KeyNumber}}.category="speedDial" lineKey.{{KeyNumber}}.index="{{Data.SpeedDialIndex}}"/>
+    {{/Data.SpeedDial}}
+{{/KeyList}}
+{{/Data.BLFEnable}}
+
+<voIpProt>
+     <voIpProt.SIP>
+      <specialEvent voIpProt.SIP.specialEvent.checkSync.alwaysReboot="1"/>
+	<alertInfo voIpProt.SIP.alertInfo.1.value="Ring Answer" voIpProt.SIP.alertInfo.1.class="4"/>
+	<voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.2.value="Silent"               voIpProt.SIP.alertInfo.2.class="custom1"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.3.value="Low Trill"            voIpProt.SIP.alertInfo.3.class="custom2"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.4.value="Low Double Trill"     voIpProt.SIP.alertInfo.4.class="custom3"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.5.value="Medium Trill"         voIpProt.SIP.alertInfo.5.class="custom4"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.6.value="Medium Double Trill"  voIpProt.SIP.alertInfo.6.class="custom5"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.7.value="High Trill"           voIpProt.SIP.alertInfo.7.class="custom6"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.8.value="High Double Trill"    voIpProt.SIP.alertInfo.8.class="custom7"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.9.value="Highest Trill"        voIpProt.SIP.alertInfo.9.class="custom8"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo.10.value="Highest Double Trill" voIpProt.SIP.alertInfo.10.class="custom9"/>
+      <voIpProt.SIP.alertInfo  voIpProt.SIP.alertInfo11.value="Beeble"               voIpProt.SIP.alertInfo.11.class="custom10"/>
+      <voIpProt.SIP.alertInfo voIpProt.SIP.alertInfo.12.value="Triplet"              voIpProt.SIP.alertInfo.12.class="custom11"/>
+      <voIpProt.SIP.alertInfo voIpProt.SIP.alertInfo.13.value="Ringback-style"       voIpProt.SIP.alertInfo.13.class="custom12"/>
+      <voIpProt.SIP.alertInfo voIpProt.SIP.alertInfo.14.value="Low Trill Precedence" voIpProt.SIP.alertInfo.14.class="custom13"/>
+      <voIpProt.SIP.alertInfo voIpProt.SIP.alertInfo.15.value="Ring Splash"          voIpProt.SIP.alertInfo.15.class="custom14"/>
+  </voIpProt>
+  <httpd httpd.enabled="$http">
+      <httpd.cfg httpd.cfg.enabled="1" httpd.cfg.port="80" httpd.cfg.secureTunnelEnabled="1" httpd.cfg.secureTunnelPort="443" httpd.cfg.secureTunnelRequired="1">
+  </httpd.cfg>
+<se>
+  <se.pat.misc>
+          <se.pat.misc.messageWaiting>
+            <se.pat.misc.messageWaiting.inst se.pat.misc.messageWaiting.inst.1.value="0" se.pat.misc.messageWaiting.inst.2.value="0" se.pat.misc.messageWaiting.inst.3.value="0" />
+          </se.pat.misc.messageWaiting>
+        </se.pat.misc>
+</se.pat>
+<se.rt se.rt.enabled="1"/>
+<RING_ANSWER se.rt.4.name="Ring Answer" se.rt.4.type="ring-answer" se.rt.4.timeout="500" se.rt.4.ringer="2" se.rt.4.callWait="6" se.rt.4.mod="1"/>
+
+          <se.rt.custom1   se.rt.custom1.name="Silent"               se.rt.custom1.ringer="ringer1" />
+          <se.rt.custom2   se.rt.custom2.name="Low Trill"            se.rt.custom2.ringer="ringer2" />
+          <se.rt.custom3   se.rt.custom3.name="Low Double Trill"     se.rt.custom3.ringer="ringer3" />
+          <se.rt.custom4   se.rt.custom4.name="Medium Trill"         se.rt.custom4.ringer="ringer4" />
+          <se.rt.custom5   se.rt.custom5.name="Medium Double Trill"  se.rt.custom5.ringer="ringer5" />
+          <se.rt.custom6   se.rt.custom6.name="High Trill"           se.rt.custom6.ringer="ringer6" />
+          <se.rt.custom7   se.rt.custom7.name="High Double Trill"    se.rt.custom7.ringer="ringer7" />
+          <se.rt.custom8   se.rt.custom8.name="Highest Trill"        se.rt.custom8.ringer="ringer8" />
+          <se.rt.custom9   se.rt.custom9.name="Highest Double Trill" se.rt.custom9.ringer="ringer9" />
+          <se.rt.custom10 se.rt.custom10.name="Beeble"               se.rt.custom10.ringer="ringer10" />
+          <se.rt.custom11 se.rt.custom11.name="Triplet"              se.rt.custom11.ringer="ringer11" />
+          <se.rt.custom12 se.rt.custom12.name="Ringback-style"       se.rt.custom12.ringer="ringer12" />
+          <se.rt.custom13 se.rt.custom13.name="Low Trill Precedence" se.rt.custom13.ringer="ringer13" />
+          <se.rt.custom14 se.rt.custom14.name="Ring Splash"          se.rt.custom14.ringer="ringer14" />
+     </se>
+
+     </reg> <sip/>
+    </polycomconfig>
