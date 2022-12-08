@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/voicenter/phoneStash#readme",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "fs": "0.0.1-security",
     "mustache": "^3.0.1",
     "my-load-data": "^1.1.0",
